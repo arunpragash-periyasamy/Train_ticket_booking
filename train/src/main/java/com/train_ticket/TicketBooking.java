@@ -9,24 +9,7 @@ import java.util.List;
 
 public class TicketBooking {
 
-    // Method to add a user
-    public void addUser(User user) {
-        String sql = "INSERT INTO users (username, email) VALUES (?, ?)";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getEmail());
-
-            pstmt.executeUpdate();
-            System.out.println("User added successfully!");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     // Method to add a train
     public void addTrain(Train train) {
         String sql = "INSERT INTO trains (train_number, destination, departure_time) VALUES (?, ?, ?)";
@@ -122,31 +105,7 @@ public class TicketBooking {
         return tickets;
     }
 
-    // Method to list all users
-    public List<User> listAllUsers() {
-        String sql = "SELECT * FROM users";
-        List<User> users = new ArrayList<>();
-
-        try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                users.add(user);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return users;
-    }
-
+    
     // Method to list all bookings
     public List<Ticket> listAllBookings() {
         String sql = "SELECT * FROM tickets";
