@@ -161,4 +161,31 @@ public class TicketBooking {
         return tickets;
     }
 
+    // Method to list all trains
+    public List<Train> listAllTrains() {
+        String sql = "SELECT * FROM trains";
+        List<Train> trains = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Train train = new Train();
+                train.setId(rs.getInt("id"));
+                train.setTrainNumber(rs.getString("train_number"));
+                train.setDestination(rs.getString("destination"));
+                train.setDeparture(rs.getString("departure"));
+                train.setDepartureTime(rs.getString("departure_time"));
+                trains.add(train);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error fetching trains: " + e.getMessage());
+        }
+
+        return trains;
+    }
+
 }

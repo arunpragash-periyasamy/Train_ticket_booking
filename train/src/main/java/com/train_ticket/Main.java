@@ -19,9 +19,10 @@ public class Main {
             System.out.println("5. List Bookings by User ID");
             System.out.println("6. List Bookings by User Email");
             System.out.println("7. List All Users");
-            System.out.println("8. List All Bookings");
-            System.out.println("9. List All Tickets by Train ID");
-            System.out.println("10. Exit");
+            System.out.println("8. List All Trains");
+            System.out.println("9. List All Bookings");
+            System.out.println("10. List All Tickets by Train ID");
+            System.out.println("11. Exit");
             System.out.print("Choose an option: ");
             int option = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -122,6 +123,22 @@ public class Main {
                     }
                     break;
                 case 8:
+                    List<Train> allTrains = booking.listAllTrains();
+                    if (allTrains.isEmpty()) {
+                        System.out.println("No trains found.");
+                    } else {
+                        System.out.println("All trains:");
+                        for (Train t : allTrains) {
+                            System.out.println("Train ID: " + t.getId());
+                            System.out.println("Train Number: " + t.getTrainNumber());
+                            System.out.println("Destination: " + t.getDestination());
+                            System.out.println("Departure: " + t.getDeparture());
+                            System.out.println("Departure Time: " + t.getDepartureTime());
+                            System.out.println();
+                        }
+                    }
+                    break;
+                case 9:
                     List<Ticket> allTickets = booking.listAllBookings();
                     if (allTickets.isEmpty()) {
                         System.out.println("No bookings found.");
@@ -137,7 +154,7 @@ public class Main {
                         }
                     }
                     break;
-                case 9:
+                case 10:
                     System.out.print("Enter train ID: ");
                     int searchTrainId = scanner.nextInt();
                     List<Ticket> ticketsByTrainId = booking.listTicketsByTrainId(searchTrainId);
@@ -154,7 +171,7 @@ public class Main {
                         }
                     }
                     break;
-                case 10:
+                case 11:
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);
