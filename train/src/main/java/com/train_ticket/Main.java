@@ -20,7 +20,8 @@ public class Main {
             System.out.println("6. List Bookings by User Email");
             System.out.println("7. List All Users");
             System.out.println("8. List All Bookings");
-            System.out.println("9. Exit");
+            System.out.println("9. List All Tickets by Train ID");
+            System.out.println("10. Exit");
             System.out.print("Choose an option: ");
             int option = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -137,6 +138,23 @@ public class Main {
                     }
                     break;
                 case 9:
+                    System.out.print("Enter train ID: ");
+                    int searchTrainId = scanner.nextInt();
+                    List<Ticket> ticketsByTrainId = booking.listTicketsByTrainId(searchTrainId);
+                    if (ticketsByTrainId.isEmpty()) {
+                        System.out.println("No tickets found for this train.");
+                    } else {
+                        System.out.println("Tickets for train ID " + searchTrainId + ":");
+                        for (Ticket t : ticketsByTrainId) {
+                            System.out.println("Ticket ID: " + t.getId());
+                            System.out.println("User ID: " + t.getUserId());
+                            System.out.println("Date of Journey: " + t.getDateOfJourney());
+                            System.out.println("Seat Number: " + t.getSeatNumber());
+                            System.out.println();
+                        }
+                    }
+                    break;
+                case 10:
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);

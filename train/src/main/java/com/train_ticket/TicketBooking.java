@@ -132,4 +132,33 @@ public class TicketBooking {
 
         return tickets;
     }
+
+    // Method to list tickets by train ID
+    public List<Ticket> listTicketsByTrainId(int trainId) {
+        String sql = "SELECT * FROM tickets WHERE train_id = ?";
+        List<Ticket> tickets = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, trainId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Ticket ticket = new Ticket();
+                ticket.setId(rs.getInt("id"));
+                ticket.setUserId(rs.getInt("user_id"));
+                ticket.setTrainId(rs.getInt("train_id"));
+                ticket.setDateOfJourney(rs.getString("date_of_journey"));
+                ticket.setSeatNumber(rs.getInt("seat_number"));
+                tickets.add(ticket);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error fetching tickets: " + e.getMessage());
+        }
+
+        return tickets;
+    }
+
 }
