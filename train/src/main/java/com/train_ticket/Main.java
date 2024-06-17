@@ -22,7 +22,8 @@ public class Main {
             System.out.println("8. List All Trains");
             System.out.println("9. List All Bookings");
             System.out.println("10. List All Tickets by Train ID");
-            System.out.println("11. Exit");
+            System.out.println("11. Cancel Ticket");
+            System.out.println("12. Exit");
             System.out.print("Choose an option: ");
             int option = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -200,6 +201,11 @@ public class Main {
                     }
                     break;
                 case 11:
+                    System.out.print("Enter ticket ID: ");
+                    int cancelTicketId = scanner.nextInt();
+                    booking.cancelTicket(cancelTicketId);
+                    break;
+                case 12:
                     System.out.println("Exiting...");
                     scanner.close();
                     System.gc();

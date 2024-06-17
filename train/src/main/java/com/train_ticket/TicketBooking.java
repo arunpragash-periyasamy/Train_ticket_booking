@@ -188,4 +188,24 @@ public class TicketBooking {
         return trains;
     }
 
+    public void cancelTicket(int ticketId) {
+        String sql = "DELETE FROM tickets WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, ticketId);
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("Ticket cancelled successfully!");
+            } else {
+                System.out.println("Ticket not found!");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error cancelling ticket: " + e.getMessage());
+        }
+    }
+    
 }
