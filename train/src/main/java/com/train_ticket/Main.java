@@ -174,6 +174,7 @@ public class Main {
                 case 11:
                     System.out.println("Exiting...");
                     scanner.close();
+                    System.gc();
                     System.exit(0);
                 default:
                     System.out.println("Invalid option. Please try again.");
