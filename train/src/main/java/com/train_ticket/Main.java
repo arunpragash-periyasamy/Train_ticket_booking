@@ -61,14 +61,42 @@ public class Main {
                     booking.addTrain(train);
                     break;
 
+                // case 4:
+                //     System.out.print("Enter user ID: ");
+                //     int userId = scanner.nextInt();
+                //     System.out.print("Enter train ID: ");
+                //     int trainId = scanner.nextInt();
+                //     scanner.nextLine(); // Consume newline
+                //     System.out.print("Enter date of journey (YYYY-MM-DD): ");
+                //     String dateOfJourney = scanner.nextLine();
+                //     System.out.print("Enter seat number: ");
+                //     int seatNumber = scanner.nextInt();
+                //     Ticket ticket = new Ticket(userId, trainId, dateOfJourney, seatNumber);
+                //     booking.bookTicket(ticket);
+                //     break;
                 case 4:
                     System.out.print("Enter user ID: ");
                     int userId = scanner.nextInt();
                     System.out.print("Enter train ID: ");
                     int trainId = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    System.out.print("Enter date of journey (YYYY-MM-DD): ");
-                    String dateOfJourney = scanner.nextLine();
+                    scanner.nextLine();
+                    String dateOfJourney;
+                    do {
+                        System.out.print("Enter date of journey (YYYY-MM-DD): ");
+                        dateOfJourney = scanner.nextLine();
+                        if (!ValidationUtil.isValidDate(dateOfJourney)) {
+                            System.out.println("Invalid date format. Please try again.");
+                        }
+                    } while (!ValidationUtil.isValidDate(dateOfJourney));
+
+                    do {
+                        System.out.print("Enter departure time (HH:mm:ss): ");
+                        departureTime = scanner.nextLine();
+                        if (!ValidationUtil.isValidTime(departureTime)) {
+                            System.out.println("Invalid time format. Please try again.");
+                        }
+                    } while (!ValidationUtil.isValidTime(departureTime));
+
                     System.out.print("Enter seat number: ");
                     int seatNumber = scanner.nextInt();
                     Ticket ticket = new Ticket(userId, trainId, dateOfJourney, seatNumber);
